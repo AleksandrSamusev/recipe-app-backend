@@ -6,6 +6,7 @@ import dev.practice.recipeappback.services.RecipeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,12 +45,14 @@ public class RecipeController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<Recipe>> findAllByCategoryAndType(@RequestParam String category,
+    public ResponseEntity<Page<Recipe>> findAllByCategoryAndType(@RequestParam String category,
                                                                  @RequestParam String type,
+                                                                 @RequestParam(defaultValue = "0") int page,
+                                                                 @RequestParam(defaultValue = "6") int size,
                                                                  @RequestParam(required = false) String text) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(recipeService.findAllByCategoryAndType(category, type, text));
+                .body(recipeService.findAllByCategoryAndType(category, type, text, page, size));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")

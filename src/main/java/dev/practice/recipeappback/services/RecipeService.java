@@ -2,6 +2,8 @@ package dev.practice.recipeappback.services;
 
 import dev.practice.recipeappback.dtos.NewRecipeDto;
 import dev.practice.recipeappback.models.Recipe;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ public interface RecipeService {
 
     Recipe getRecipeById(Long recipeId);
 
-    List<Recipe> findAllByCategoryAndType(String category, String type, String text);
+    Page<Recipe> findAllByCategoryAndType(String category, String type, String text, int page, int size);
 
     void deleteRecipe(String username, Long recipeId);
 }

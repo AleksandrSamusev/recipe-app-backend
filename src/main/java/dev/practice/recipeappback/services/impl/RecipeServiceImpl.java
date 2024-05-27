@@ -16,8 +16,11 @@ import dev.practice.recipeappback.services.StepService;
 import dev.practice.recipeappback.utils.Validations;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -82,15 +85,11 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public List<Recipe> findAllByCategoryAndType(String category, String type, String text) {
-        List<Recipe> recipes = recipeRepository.findAllByCategoryAndType(category, type);
+    public Page<Recipe> findAllByCategoryAndType(String category, String type, String text, int page, int size) {
         if (text != null && !text.equals("")) {
-           return recipes.stream()
-                    .filter(recipe -> recipe.getTitle().toLowerCase().contains(text.trim().toLowerCase())
-                            || recipe.getDescription().toLowerCase().contains(text.trim().toLowerCase()))
-                    .collect(Collectors.toList());
+            return recipeRepository.findByCategoryTypeAndText(category, type, text, PageRequest.of(page, size));
         }
-        return recipes;
+        return recipeRepository.findAllByCategoryAndType(category, type, PageRequest.of(page, size));
     }
 
     @Override
