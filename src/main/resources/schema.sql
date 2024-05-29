@@ -71,6 +71,14 @@ CREATE TABLE IF NOT EXISTS users
     avatar     LONGTEXT
 );
 
+CREATE TABLE IF NOT EXISTS comments
+(
+    comment_id BIGINT auto_increment primary key,
+    comment    TEXT NOT NULL,
+    author     TEXT NOT NULL,
+    date       TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS roles
 (
     role_id BIGINT auto_increment primary key,

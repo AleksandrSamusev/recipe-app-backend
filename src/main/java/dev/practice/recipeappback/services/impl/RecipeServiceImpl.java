@@ -104,4 +104,14 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.deleteById(recipeId);
         log.info("Recipe with id {} was deleted", recipeId);
     }
+
+    @Override
+    public Boolean updateRating(Long recipeId, String rating) {
+        Recipe recipe = recipeRepository.findById(recipeId).orElseThrow(() ->
+                new ResourceNotFoundException("Recipe", "id", recipeId.toString()));
+        recipe.setRating(Integer.parseInt(rating));
+        Recipe savedRecipe = recipeRepository.save(recipe);
+        log.info("Recipe with id {} was updated", savedRecipe.getRecipeId());
+        return true;
+    }
 }

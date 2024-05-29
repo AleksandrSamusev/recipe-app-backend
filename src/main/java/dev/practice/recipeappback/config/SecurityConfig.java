@@ -30,6 +30,7 @@ public class SecurityConfig {
             authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
             authorize.requestMatchers(HttpMethod.DELETE, "/api/v1/recipes/**").hasAnyRole("USER", "ADMIN");
             authorize.requestMatchers(HttpMethod.POST, "/api/v1/recipes").hasAnyRole("USER", "ADMIN");
+            authorize.requestMatchers(HttpMethod.PUT, "/api/v1/recipes/**").permitAll();
             authorize.requestMatchers("/api/v1/auth/**").permitAll();
             authorize.anyRequest().authenticated();
         }).httpBasic(Customizer.withDefaults());

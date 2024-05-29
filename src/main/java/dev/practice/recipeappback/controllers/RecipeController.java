@@ -75,4 +75,13 @@ public class RecipeController {
                 .body("Recipe deleted!");
     }
 
+    @PutMapping("/{recipeId}/rating")
+    public ResponseEntity<String> updateRating(@PathVariable Long recipeId,
+                                                @RequestParam String value) {
+        recipeService.updateRating(recipeId, value);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Rating updated!");
+    }
+
 }

@@ -18,4 +18,6 @@ public interface RecipeService {
     Page<Recipe> findAllByCategoryAndType(String category, String type, String text, int page, int size);
 
     void deleteRecipe(String username, Long recipeId);
+
+    Boolean updateRating(Long recipeId, String rating);
 }
