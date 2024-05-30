@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS recipes
     main_ingredient varchar(50) NOT NULL,
     title           text        NOT NULL,
     description     text        NOT NULL,
-    rating          int,
+    rating          DOUBLE,
     prepare_time    TEXT        NOT NULL,
     cooking_time    TEXT        NOT NULL,
     img_large       LONGTEXT    NOT NULL,
@@ -19,7 +19,10 @@ CREATE TABLE IF NOT EXISTS recipes
     img_small_1     LONGTEXT    NOT NULL,
     img_small_2     LONGTEXT    NOT NULL,
     img_small_3     LONGTEXT    NOT NULL,
-    img_small_4     LONGTEXT    NOT NULL
+    img_small_4     LONGTEXT    NOT NULL,
+    number_of_rates BIGINT,
+    raw_rate        BIGINT
+
 );
 
 CREATE TABLE IF NOT EXISTS nutrients
@@ -76,7 +79,8 @@ CREATE TABLE IF NOT EXISTS comments
     comment_id BIGINT auto_increment primary key,
     comment    TEXT NOT NULL,
     author     TEXT NOT NULL,
-    date       TEXT NOT NULL
+    date       TEXT NOT NULL,
+    recipe_id  bigint REFERENCES recipes (recipe_id) on delete cascade
 );
 
 CREATE TABLE IF NOT EXISTS roles

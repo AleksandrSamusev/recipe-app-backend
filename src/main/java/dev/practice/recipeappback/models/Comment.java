@@ -1,5 +1,6 @@
 package dev.practice.recipeappback.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +28,9 @@ public class Comment {
 
     @Column(name = "date")
     private String date;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "recipe_id", nullable = false)
+    private Recipe recipe;
 }

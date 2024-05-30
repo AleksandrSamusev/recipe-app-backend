@@ -1,7 +1,9 @@
 package dev.practice.recipeappback.controllers;
 
+import dev.practice.recipeappback.dtos.NewCommentDto;
 import dev.practice.recipeappback.dtos.NewRecipeDto;
 import dev.practice.recipeappback.models.Recipe;
+import dev.practice.recipeappback.services.CommentService;
 import dev.practice.recipeappback.services.RecipeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -29,6 +31,7 @@ import java.util.List;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final CommentService commentService;
 
     @GetMapping()
     public ResponseEntity<List<Recipe>> getRecipes() {
@@ -82,6 +85,14 @@ public class RecipeController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Rating updated!");
+    }
+
+    @PostMapping("/{recipeId}/comment")
+    public ResponseEntity<String> postComment(@PathVariable Long recipeId, @Valid @RequestBody NewCommentDto dto) {
+        commentService.createCommentToRecipe(recipeId, dto);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Comment created!");
     }
 
 }

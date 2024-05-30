@@ -30,9 +30,7 @@ public class RecipeMapper {
         recipe.setIngredients(new HashSet<>());
         recipe.setNutrients(new HashSet<>());
         recipe.setSteps(new HashSet<>());
+        recipe.setComments(new HashSet<>());
         return recipe;
     }
-
-
-
 }

@@ -61,7 +61,7 @@ public class NewRecipeDto {
     )
     @PositiveOrZero(message = "The value should be positive or zero")
     @Max(value = 5, message = "The max value is 5")
-    private Integer rating;
+    private double rating;
 
     @Schema(
             description = "Time required to prepare for the start of the cooking process",
@@ -120,4 +120,6 @@ public class NewRecipeDto {
     Set<NewNutrientDto> nutrients;
 
     Set<NewStepDto> steps;
+
+    Set<NewCommentDto> comments;
 }

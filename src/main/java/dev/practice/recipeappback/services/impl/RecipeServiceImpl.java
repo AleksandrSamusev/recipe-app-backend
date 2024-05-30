@@ -1,10 +1,8 @@
 package dev.practice.recipeappback.services.impl;
 
-import dev.practice.recipeappback.dtos.NewIngredientDto;
-import dev.practice.recipeappback.dtos.NewNutrientDto;
-import dev.practice.recipeappback.dtos.NewRecipeDto;
-import dev.practice.recipeappback.dtos.NewStepDto;
+import dev.practice.recipeappback.dtos.*;
 import dev.practice.recipeappback.exception.ResourceNotFoundException;
+import dev.practice.recipeappback.mappers.CommentMapper;
 import dev.practice.recipeappback.mappers.RecipeMapper;
 import dev.practice.recipeappback.models.*;
 import dev.practice.recipeappback.repositories.RecipeRepository;
@@ -20,11 +18,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -67,8 +63,6 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setNutrients(savedNutrients);
 
         Recipe savedRecipe = recipeRepository.save(recipe);
-/*        user.getRecipes().add(savedRecipe);
-        userRepository.save(user);*/
 
         stepDtos.forEach(item -> {
             stepService.createStep(item, savedRecipe.getRecipeId());
@@ -106,12 +100,20 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Boolean updateRating(Long recipeId, String rating) {
+    public void updateRating(Long recipeId, String rating) {
         Recipe recipe = recipeRepository.findById(recipeId).orElseThrow(() ->
                 new ResourceNotFoundException("Recipe", "id", recipeId.toString()));
-        recipe.setRating(Integer.parseInt(rating));
+        recipe.setNumberOfRates(recipe.getNumberOfRates() + 1);
+        recipe.setRawRate(recipe.getRawRate() + Integer.parseInt(rating));
+
+        long raw = recipe.getRawRate();
+        long total = recipe.getNumberOfRates();
+
+
+        recipe.setRating((double) Math.round((float) raw / total * 10) / 10);
+
+
         Recipe savedRecipe = recipeRepository.save(recipe);
         log.info("Recipe with id {} was updated", savedRecipe.getRecipeId());
-        return true;
     }
 }

@@ -40,7 +40,7 @@ public class Recipe {
     private String description;
 
     @Column(name = "rating")
-    private Integer rating;
+    private double rating;
 
     @Column(name = "prepare_time")
     private String prepareTime;
@@ -66,6 +66,12 @@ public class Recipe {
     @Column(name = "img_small_4")
     private String imgSmall4;
 
+    @Column(name = "number_of_rates")
+    private long numberOfRates;
+
+    @Column(name = "raw_rate")
+    private long rawRate;
+
     @ManyToMany
     @JoinTable(
             name = "recipes_ingredients",
@@ -84,4 +90,8 @@ public class Recipe {
 
     @OneToMany(mappedBy = "recipe")
     private Set<Step> steps;
+
+    @OneToMany(mappedBy = "recipe")
+    private Set<Comment> comments;
+
 }

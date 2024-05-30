@@ -1,5 +1,6 @@
 package dev.practice.recipeappback.services;
 
+import dev.practice.recipeappback.dtos.NewCommentDto;
 import dev.practice.recipeappback.dtos.NewRecipeDto;
 import dev.practice.recipeappback.models.Recipe;
 import org.springframework.data.domain.Page;
@@ -19,5 +20,5 @@ public interface RecipeService {
 
     void deleteRecipe(String username, Long recipeId);
 
-    Boolean updateRating(Long recipeId, String rating);
+    void updateRating(Long recipeId, String rating);
 }
