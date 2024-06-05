@@ -20,5 +20,5 @@ public interface RecipeService {
 
     void deleteRecipe(String username, Long recipeId);
 
-    void updateRating(Long recipeId, String rating);
+    double updateRating(Long recipeId, String rating);
 }

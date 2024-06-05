@@ -100,7 +100,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void updateRating(Long recipeId, String rating) {
+    public double updateRating(Long recipeId, String rating) {
         Recipe recipe = recipeRepository.findById(recipeId).orElseThrow(() ->
                 new ResourceNotFoundException("Recipe", "id", recipeId.toString()));
         recipe.setNumberOfRates(recipe.getNumberOfRates() + 1);
@@ -109,11 +109,12 @@ public class RecipeServiceImpl implements RecipeService {
         long raw = recipe.getRawRate();
         long total = recipe.getNumberOfRates();
 
-
-        recipe.setRating((double) Math.round((float) raw / total * 10) / 10);
+        double calculatedRating = (double) Math.round((float) raw / total * 10) / 10;
+        recipe.setRating(calculatedRating);
 
 
         Recipe savedRecipe = recipeRepository.save(recipe);
         log.info("Recipe with id {} was updated", savedRecipe.getRecipeId());
+        return calculatedRating;
     }
 }

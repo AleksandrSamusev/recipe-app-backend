@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS comments
     comment_id BIGINT auto_increment primary key,
     comment    TEXT NOT NULL,
     author     TEXT NOT NULL,
-    date       TEXT NOT NULL,
+    date       TIMESTAMP NOT NULL,
     recipe_id  bigint REFERENCES recipes (recipe_id) on delete cascade
 );
 

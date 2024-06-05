@@ -11,6 +11,7 @@
     <groupId>dev.practice</groupId>
     <artifactId>recipe-app-back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>recipe-app-back</name>
     <description>recipe-app-back</description>
     <properties>

@@ -1,11 +1,14 @@
 package dev.practice.recipeappback.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,8 +29,9 @@ public class Comment {
     @Column(name = "author")
     private String author;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(name = "date")
-    private String date;
+    private LocalDateTime date;
 
     @JsonIgnore
     @ManyToOne

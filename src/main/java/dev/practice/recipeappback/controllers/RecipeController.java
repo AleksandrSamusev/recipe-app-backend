@@ -1,5 +1,6 @@
 package dev.practice.recipeappback.controllers;
 
+import dev.practice.recipeappback.dtos.CommentSmallDto;
 import dev.practice.recipeappback.dtos.NewCommentDto;
 import dev.practice.recipeappback.dtos.NewRecipeDto;
 import dev.practice.recipeappback.models.Recipe;
@@ -79,20 +80,18 @@ public class RecipeController {
     }
 
     @PutMapping("/{recipeId}/rating")
-    public ResponseEntity<String> updateRating(@PathVariable Long recipeId,
+    public ResponseEntity<Double> updateRating(@PathVariable Long recipeId,
                                                 @RequestParam String value) {
-        recipeService.updateRating(recipeId, value);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("Rating updated!");
+                .body(recipeService.updateRating(recipeId, value));
     }
 
     @PostMapping("/{recipeId}/comment")
-    public ResponseEntity<String> postComment(@PathVariable Long recipeId, @Valid @RequestBody NewCommentDto dto) {
-        commentService.createCommentToRecipe(recipeId, dto);
+    public ResponseEntity<CommentSmallDto> postComment(@PathVariable Long recipeId, @Valid @RequestBody NewCommentDto dto) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body("Comment created!");
+                .body(commentService.createCommentToRecipe(recipeId, dto));
     }
 
 }

@@ -22,10 +22,13 @@ public class StepServiceImpl implements StepService {
 
     @Override
     public Step createStep(NewStepDto dto, Long recipeId) {
+        String trimmedDescription = dto.getDescription().trim().replaceAll("\\s{2,}", " ");
+        dto.setDescription(trimmedDescription);
         Recipe recipe = recipeRepository.findById(recipeId).orElseThrow(
                 () -> new ResourceNotFoundException("Recipe", "recipeId", recipeId.toString())
         );
         Step step = StepMapper.toStep(dto);
+
         step.setRecipe(recipe);
         Step savedStep = stepRepository.save(step);
         log.info("Step with id = {} created", savedStep.getStepId());
