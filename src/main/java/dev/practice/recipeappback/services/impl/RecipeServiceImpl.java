@@ -32,7 +32,6 @@ public class RecipeServiceImpl implements RecipeService {
     private final StepService stepService;
     private final NutrientService nutrientService;
     private final Validations validations;
-    private final UserRepository userRepository;
 
     @Override
     public List<Recipe> getRecipes() {
@@ -43,6 +42,7 @@ public class RecipeServiceImpl implements RecipeService {
     public boolean createRecipe(NewRecipeDto dto, String login) {
 
         User user = validations.checkUserExistsByUsernameOrEmail(login);
+
 
         Set<Ingredient> savedIngredients = new HashSet<>();
         Set<Nutrient> savedNutrients = new HashSet<>();
