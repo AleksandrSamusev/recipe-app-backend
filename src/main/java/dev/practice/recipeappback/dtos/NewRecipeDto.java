@@ -80,12 +80,6 @@ public class NewRecipeDto {
     private String cookingTime;
 
     @Schema(
-            description = "Main large image 800x600 placed on Recipes page"
-    )
-    @NotEmpty(message = "Large image parameter cannot be empty")
-    private String imgLarge;
-
-    @Schema(
             description = "Medium image 400x400 placed on certain recipe page"
     )
     @NotEmpty(message = "Medium image parameter cannot be empty")

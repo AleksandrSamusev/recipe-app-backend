@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  recipe-db:
+    image: mysql:latest
+    container_name: recipe-db
+    ports:
+      - "7777:3306"
+    volumes:
+      - /var/lib/mysql2/data/
+    environment:
+      MYSQL_DATABASE: "recipedb"
+      MYSQL_ROOT_PASSWORD: "root"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+
+  recipe-app-front:
+    image: "alexsamusev/recipe-app-front:v1"
+    container_name: recipe-app-front
+    ports:
+      - "3000:3000"
+    depends_on:
+      recipe-db:
+        condition: service_healthy
+
+  recipe-app-back:
+    image: "alexsamusev/recipe-app-back:v1"
+    container_name: recipe-app-back
+    ports:
+      - "8080:8080"
+    depends_on:
+      recipe-db:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://recipe-db:3306/recipedb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root

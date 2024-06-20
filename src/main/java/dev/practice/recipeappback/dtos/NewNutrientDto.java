@@ -22,20 +22,6 @@ public class NewNutrientDto {
     private String name;
 
     @Schema(
-            description = "The value of the nutrient",
-            example = "1",
-            deprecated = true
-    )
-    private String value;
-
-    @Schema(
-            description = "The units of the nutrient",
-            example = "mg.",
-            deprecated = true
-    )
-    private String units;
-
-    @Schema(
             description = "The recipe id",
             example = "1"
     )

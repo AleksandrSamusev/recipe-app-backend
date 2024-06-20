@@ -20,8 +20,6 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public Ingredient createIngredient(NewIngredientDto dto) {
         dto.setName(dto.getName().trim().replaceAll("\\s{2,}", " "));
-        dto.setValue(dto.getValue().trim().replaceAll("\\s{2,}", " "));
-        dto.setUnits(dto.getUnits().trim().replaceAll("\\s{2,}", " "));
         Ingredient savedIngredient = ingredientRepository.save(IngredientMapper.toIngredient(dto));
         log.info("New ingredient with id = {} created", savedIngredient.getIngredientId());
         return savedIngredient;

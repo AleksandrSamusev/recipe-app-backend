@@ -10,8 +10,6 @@ public class NutrientMapper {
     public static Nutrient toNutrient(NewNutrientDto dto) {
         Nutrient nutrient = new Nutrient();
         nutrient.setName(dto.getName());
-        nutrient.setValue(dto.getValue());
-        nutrient.setUnits(dto.getUnits());
         return nutrient;
     }
 }

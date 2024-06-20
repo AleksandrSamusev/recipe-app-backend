@@ -25,12 +25,6 @@ public class Nutrient {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "value")
-    private String value;
-
-    @Column(name = "units")
-    private String units;
-
     @JsonIgnore
     @ManyToMany(mappedBy = "nutrients")
     private Set<Recipe> recipes = new HashSet<>();

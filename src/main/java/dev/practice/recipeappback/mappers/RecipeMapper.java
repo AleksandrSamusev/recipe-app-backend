@@ -21,7 +21,6 @@ public class RecipeMapper {
         recipe.setRating(dto.getRating());
         recipe.setPrepareTime(dto.getPrepareTime());
         recipe.setCookingTime(dto.getCookingTime());
-        recipe.setImgLarge(dto.getImgLarge());
         recipe.setImgMedium(dto.getImgMedium());
         recipe.setImgSmall1(dto.getImgSmall1());
         recipe.setImgSmall2(dto.getImgSmall2());

@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS recipes
     rating          DOUBLE,
     prepare_time    TEXT        NOT NULL,
     cooking_time    TEXT        NOT NULL,
-    img_large       LONGTEXT    NOT NULL,
     img_medium      LONGTEXT    NOT NULL,
     img_small_1     LONGTEXT    NOT NULL,
     img_small_2     LONGTEXT    NOT NULL,
@@ -28,17 +27,13 @@ CREATE TABLE IF NOT EXISTS recipes
 CREATE TABLE IF NOT EXISTS nutrients
 (
     nutrient_id bigint auto_increment primary key,
-    name        varchar(100) NOT NULL,
-    value       varchar(50)  NOT NULL,
-    units       varchar(50)  NOT NULL
+    name        varchar(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS ingredients
 (
     ingredient_id bigint auto_increment primary key,
-    name          varchar(100) NOT NULL,
-    value         varchar(50)  NOT NULL,
-    units         varchar(50)  NOT NULL
+    name          varchar(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS recipes_ingredients

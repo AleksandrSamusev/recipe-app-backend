@@ -19,8 +19,6 @@ public class NutrientServiceImpl implements NutrientService {
     @Override
     public Nutrient createNutrient(NewNutrientDto dto) {
         dto.setName(dto.getName().trim().replaceAll("\\s{2,}", " "));
-        dto.setValue(dto.getValue().trim().replaceAll("\\s{2,}", " "));
-        dto.setUnits(dto.getUnits().trim().replaceAll("\\s{2,}", " "));
         Nutrient savedNutrient =  nutrientRepository.save(NutrientMapper.toNutrient(dto));
         log.info("Nutrient with id = {} created", savedNutrient.getNutrientId());
         return savedNutrient;

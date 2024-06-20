@@ -10,8 +10,6 @@ public class IngredientMapper {
     public static Ingredient toIngredient(NewIngredientDto dto) {
         Ingredient ingredient = new Ingredient();
         ingredient.setName(dto.getName());
-        ingredient.setValue(dto.getValue());
-        ingredient.setUnits(dto.getUnits());
         return ingredient;
     }
 }

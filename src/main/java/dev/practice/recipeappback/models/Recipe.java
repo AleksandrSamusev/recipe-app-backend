@@ -48,9 +48,6 @@ public class Recipe {
     @Column(name = "cooking_time")
     private String cookingTime;
 
-    @Column(name = "img_large")
-    private String imgLarge;
-
     @Column(name = "img_medium")
     private String imgMedium;
 
