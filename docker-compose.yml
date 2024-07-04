@@ -18,7 +18,7 @@ services:
       start_period: 10s
 
   recipe-app-front:
-    image: "alexsamusev/recipe-app-front:v1"
+    image: "alexsamusev/recipe-app-front:v2"
     container_name: recipe-app-front
     ports:
       - "3000:3000"
@@ -27,7 +27,7 @@ services:
         condition: service_healthy
 
   recipe-app-back:
-    image: "alexsamusev/recipe-app-back:v1"
+    image: "alexsamusev/recipe-app-back:v2"
     container_name: recipe-app-back
     ports:
       - "8080:8080"
